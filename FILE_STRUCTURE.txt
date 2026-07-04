@@ -1,0 +1,44 @@
+car_dash/
+├── pyproject.toml
+├── config.toml                    # user-editable values (pins, simulate flag, model path)
+├── README.md
+│
+├── car_dash/                      # the actual package
+│   ├── __init__.py                # just __version__
+│   ├── __main__.py                # entry point → run via `python3 -m car_dash`
+│   ├── config.py                  # dataclass Settings + load_settings()
+│   ├── state.py                   # DisplayState class (shared, thread-safe)
+│   │
+│   ├── display/
+│   │   ├── __init__.py            # picks hardware.py vs emulator.py based on settings.simulate
+│   │   ├── render.py              # display_loop(device, state)
+│   │   ├── hardware.py            # real sh1106 + spi serial setup
+│   │   └── emulator.py            # luma.emulator pygame device setup
+│   │
+│   ├── gps/
+│   │   ├── __init__.py            # picks reader.py vs fake.py based on settings.simulate
+│   │   ├── reader.py              # real serial/gpsd reader → real_gps_source()
+│   │   └── fake.py                # fake_nmea_stream()
+│   │
+│   ├── audio/
+│   │   ├── __init__.py            # re-exports start_capture, VoskRecognizer
+│   │   ├── capture.py             # sounddevice mic pipeline (RawInputStream, queue)
+│   │   ├── recognizer.py          # VoskRecognizer wrapper (grammar, AcceptWaveform)
+│   │   └── playback_test.py       # wav-file test harness (dev/testing only)
+│   │
+│   └── buttons/
+│       ├── __init__.py            # picks gpio.py vs keyboard_sim.py based on settings.simulate
+│       ├── gpio.py                # real RPi.GPIO / gpiozero button watching
+│       └── keyboard_sim.py        # keyboard-based dev stand-in
+│
+├── tests/
+│   ├── __init__.py                # empty
+│   ├── test_state.py
+│   ├── test_gps_parsing.py
+│   ├── fixtures/
+│   │   └── sample_recordings/     # .wav files for Vosk accuracy testing
+│   └── ...
+│
+└── deploy/
+    ├── car-dash.service           # systemd unit file
+    └── sudoers-shutdown           # sudoers snippet for passwordless shutdown

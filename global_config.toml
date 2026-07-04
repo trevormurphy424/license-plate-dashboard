@@ -1,0 +1,15 @@
+[Global]
+gpio_mode = "bcm"   # bcm: uses format "GPIO10" for pins, write just GPIO number in config fields
+                    # board: uses pin numbering (1-40)
+emulator = true
+
+[Display]
+mosi_pin = 10
+clk_pin = 11
+cs_pin = 8
+dc_pin = 24
+rst_pin = 22
+
+[Buttons]
+confirm_button_pin = 17
+shutdown_button_pin = 27

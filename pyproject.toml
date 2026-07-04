@@ -1,0 +1,16 @@
+[project]
+name = "car_dash"
+version = "0.1.0"
+dependencies = [
+    "vosk",
+    "sounddevice",
+    "luma.oled",
+    "luma.emulator",
+    "RPi.GPIO",
+    "pyserial",
+    "pynmea2",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
