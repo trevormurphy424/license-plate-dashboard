@@ -1,11 +1,12 @@
 import tomllib
 from dataclasses import dataclass
 from pathlib import Path
+from importlib.resources import files
 
 project_root = Path(__file__).parent.parent
-config_file = project_root / "global_config.toml"
+config_path = files("car_dash") / "global_config.toml"
 
-with open(config_file, "rb") as f:
+with config_path.open("rb") as f:
     _config = tomllib.load(f)
 
 @dataclass(frozen=True)
