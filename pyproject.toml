@@ -6,7 +6,6 @@ dependencies = [
     "sounddevice",
     "luma.oled",
     "luma.emulator",
-    "RPi.GPIO",
     "pyserial",
     "pynmea2",
 ]
